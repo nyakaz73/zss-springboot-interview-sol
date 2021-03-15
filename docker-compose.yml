@@ -1,0 +1,37 @@
+version: "3.3"
+services:
+
+  app:
+    container_name: springboot-zss
+    image: springbootzss:latest
+    restart: always
+    build: ./
+    environment:
+      - DB_SERVER=postgresqldb
+      - POSTGRES_DB=booksdb
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+
+    ports:
+      - 8080:8080
+#    extra_hosts:
+#      # Find out what address to use with "ifconfig docker0" or "ip addr show docker0 | grep inet"
+#      - "host.docker.internal:172.17.0.1"
+    # depends on means run this service(app service) after postgresqldb service has run succssfully
+    depends_on:
+      - postgresqldb #app service depends on postgres service start that first
+#    command: ["./wait-for-it.sh", "postgresZss:5432", "--",""]
+
+  postgresqldb:
+    container_name: postgres
+    restart: always
+    image: postgres:latest
+    expose:
+      - 5432
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=booksdb
+
