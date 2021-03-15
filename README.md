@@ -61,3 +61,24 @@ The table below shows the exposed end points for the Book & Category Management
 | Update Category               | http://127.0.0.1:8080/category/<category_id> | PUT               |
 | Delete Category               | http://127.0.0.1:8080/category/<category_id> | DELETE            |
 
+
+### Examples
+
+Saving a Category your post request should have the following fields
+```json
+{
+	"title":"Thriller"
+} 
+```
+
+Saving a Book your post request should have the following fields
+
+```json
+
+{
+	"title":"Book1",
+	"price":13.86,
+	"description":"This is book one",
+	"categoryId":1
+} 
+```
